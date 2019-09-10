@@ -1,55 +1,98 @@
 <template>
-    <!-- {{scope.row}} =>获取整行的数据 -->
-    <!-- {{scope.$index}} => 行的下标 -->
-    <!-- “:” 是指令 “v-bind”的缩写，“@”是指令“v-on”的缩写； -->
+  <!-- {{scope.row}} =>获取整行的数据 -->
+  <!-- {{scope.$index}} => 行的下标 -->
+  <!-- “:” 是指令 “v-bind”的缩写，“@”是指令“v-on”的缩写； -->
   <div class="app-container">
     <div class="filter-container">
-      <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">
+      <el-button
+v-waves
+                 class="filter-item"
+                 type="primary"
+                 icon="el-icon-search"
+                 @click="handleFilter"
+>
         Search
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-button
+class="filter-item"
+                 style="margin-left: 10px;"
+                 type="primary"
+                 icon="el-icon-edit"
+                 @click="handleCreate"
+>
         Add
       </el-button>
-      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
+      <el-button
+v-waves
+                 :loading="downloadLoading"
+                 class="filter-item"
+                 type="primary"
+                 icon="el-icon-download"
+                 @click="handleDownload"
+>
         Export
       </el-button>
     </div>
 
     <el-table
-      v-loading="listLoading"
-      :data="list"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
+v-loading="listLoading"
+              :data="list"
+              element-loading-text="Loading"
+              border
+              fit
+              highlight-current-row
+>
 
-      <el-table-column align="center" label="ID" width="80">
+      <el-table-column
+align="center"
+                       label="ID"
+                       width="80"
+>
         <template slot-scope="scope">
           {{ scope.row.id }}
         </template>
       </el-table-column>
-      <el-table-column align="center" label="学号" width="130">
+      <el-table-column
+align="center"
+                       label="学号"
+                       width="130"
+>
         <template slot-scope="scope">
           {{ scope.row.studentNo }}
         </template>
       </el-table-column>
-      <el-table-column label="姓名" width="110" align="center">
+      <el-table-column
+label="姓名"
+                       width="110"
+                       align="center"
+>
         <template slot-scope="scope">
           <span>{{ scope.row.studentName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="性别" width="80" align="center">
+      <el-table-column
+label="性别"
+                       width="80"
+                       align="center"
+>
         <template slot-scope="scope">
           {{ scope.row.studentSex }}
         </template>
       </el-table-column>
-      <el-table-column label="电话" width="130" align="center">
+      <el-table-column
+label="电话"
+                       width="130"
+                       align="center"
+>
         <template slot-scope="scope">
           {{ scope.row.studentPhone }}
         </template>
       </el-table-column>
-      <el-table-column label="班级编号" width="120" align="center">
+      <el-table-column
+label="班级编号"
+                       width="120"
+                       align="center"
+>
         <template slot-scope="scope">
           {{ scope.row.classId }}
         </template>
@@ -59,12 +102,26 @@
           {{ scope.row.studentAddress }}
         </template>
       </el-table-column>
-      <el-table-column label="Actions" align="center" width="200" class-name="small-padding fixed-width">
+      <el-table-column
+label="Actions"
+                       align="center"
+                       width="200"
+                       class-name="small-padding fixed-width"
+>
         <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
+          <el-button
+type="primary"
+                     size="mini"
+                     @click="handleUpdate(row)"
+>
             编辑
           </el-button>
-          <el-button v-if="row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(row,'deleted')">
+          <el-button
+v-if="row.status!='deleted'"
+                     size="mini"
+                     type="danger"
+                     @click="handleModifyStatus(row,'deleted')"
+>
             删除
           </el-button>
         </template>
@@ -72,13 +129,14 @@
     </el-table>
     </br>
     <el-pagination
-      :current-page="pageNum"
-      :page-size="pageSize"
-      :page-sizes="[1, 5, 10, 20, 40]"
-      :total="total"
-      layout="total, sizes, prev, pager, next, jumper"
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"/>
+:current-page="pageNum"
+                   :page-size="pageSize"
+                   :page-sizes="[1, 5, 10, 20, 40]"
+                   :total="total"
+                   layout="total, sizes, prev, pager, next, jumper"
+                   @size-change="handleSizeChange"
+                   @current-change="handleCurrentChange"
+/>
 
     <!-- 编辑框 -->
     <!-- <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
@@ -143,13 +201,13 @@ export default {
         classId: '',
         id: '',
         studentAddress: '',
-        studentName: "",
+        studentName: '',
         studentNo: '',
         studentPhone: '',
         studentSex: ''
       },
       dialogFormVisible: false,
-      dialogStatus: '',
+      dialogStatus: ''
     }
   },
   created() {
@@ -159,29 +217,29 @@ export default {
     fetchData() {
       var pageNum = this.pageNum
       var pageSize = this.pageSize
-      var requestData = {pageNum,pageSize}
-      console.log("requestData:"+requestData)
+      var requestData = { pageNum, pageSize }
+      console.log('requestData:' + requestData)
       this.listLoading = true
       getStudentList(requestData).then(response => {
         this.list = response.data
-        console.log("list:"+this.list);
+        console.log('list:' + this.list)
         this.pageNum = response.pageNum
         this.pageSize = response.pageSize
         this.total = response.total
-        
+
         this.listLoading = false
       })
     },
     // 初始页currentPage、初始每页数据数pagesize和数据data
-    handleSizeChange: function (pageSize) {
-            this.pageSize = pageSize
-            this.fetchData()
-            console.log("pageSize: "+this.pageSize)  //每页下拉显示数据
+    handleSizeChange: function(pageSize) {
+      this.pageSize = pageSize
+      this.fetchData()
+      console.log('pageSize: ' + this.pageSize) // 每页下拉显示数据
     },
-    handleCurrentChange: function(pageNum){
-            this.pageNum = pageNum
-            this.fetchData()
-            console.log("pageNum: "+this.pageNum)  //点击第几页
+    handleCurrentChange: function(pageNum) {
+      this.pageNum = pageNum
+      this.fetchData()
+      console.log('pageNum: ' + this.pageNum) // 点击第几页
     },
     handleUpdate(row) {
       this.temp = Object.assign({}, row) // copy obj
@@ -191,7 +249,7 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
-    },
+    }
   }
 }
 </script>

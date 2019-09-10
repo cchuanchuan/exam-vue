@@ -8,6 +8,14 @@ export function getStudentList(params) {
   })
 }
 
+export function checkCourseStudentBusy(data) {
+  return request({
+    url: '/student/checkCourseStudentBusy',
+    method: 'post',
+    data
+  })
+}
+
 export function queryStudentPageByCondition(params, data) {
   for (const prop in data) {
     if (data.hasOwnProperty(prop) && data[prop] === '') {
@@ -48,4 +56,3 @@ export function deleteStudent(data) {
     data
   })
 }
-

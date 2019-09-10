@@ -75,7 +75,17 @@ export const constantRoutes = [
         component: () => import('@/views/table/student'),
         meta: {
           title: 'student',
-          roles: ['admin'],
+          roles: ['admin-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'teacher',
+        name: 'teacher',
+        component: () => import('@/views/table/teacher'),
+        meta: {
+          title: 'teacher',
+          roles: ['admin-user'],
           icon: 'table'
         }
       },
@@ -91,12 +101,24 @@ export const constantRoutes = [
   {
     path: '/form',
     component: Layout,
+    redirect: '/form/index',
+    name: 'Form',
+    meta: {
+      title: 'Form',
+      icon: 'form'
+    },
     children: [
       {
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
         meta: { title: 'Form', icon: 'form' }
+      },
+      {
+        path: 'addExam',
+        name: 'AddExam',
+        component: () => import('@/views/form/addExam'),
+        meta: { title: 'AddExam', icon: 'form' }
       }
     ]
   },

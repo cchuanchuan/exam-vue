@@ -16,6 +16,14 @@ export function getAllClazs(params) {
   })
 }
 
+export function queryClazsByCourse(params) {
+  return request({
+    url: '/clazs/queryClazsByCourse',
+    method: 'get',
+    params
+  })
+}
+
 export function addClazs(data) {
   return request({
     url: '/clazs/add',
@@ -39,4 +47,3 @@ export function deleteClazs(data) {
     data
   })
 }
-
