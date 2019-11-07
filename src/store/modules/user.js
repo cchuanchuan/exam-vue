@@ -1,12 +1,12 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
-import Cookies from 'js-cookie'
 
 const state = {
   token: getToken(),
   name: '',
-  avatar: ''
+  avatar: '',
+  roles: ''
 }
 
 const mutations = {
@@ -18,59 +18,63 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_ROLE: (state, roles) => {
+    state.roles = roles
   }
 }
 
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    console.log("login")
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
-      login({ username: username.trim(), password: password }).then(response => {
-        commit('SET_TOKEN', response.data.token)
-        setToken(response.data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      login({ username: username.trim(), password: password })
+        .then(response => {
+          commit('SET_TOKEN', response.data.token)
+          setToken(response.data.token)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
 
   // get user info
   getInfo({ commit, state }) {
-    console.log("getInfo")
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const data = response.data
-
-        console.log("data:"+data+"::"+response.data);
-        if (!data) {
-          reject('Verification failed, please Login again.')
-        }
-
-        const { name, avatar } = data
-
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
+      getInfo(state.token)
+        .then(response => {
+          const data = response.data
+          if (!data) {
+            reject('Verification failed, please Login again.')
+          }
+          const { name, avatar, roles } = data
+          commit('SET_NAME', name)
+          commit('SET_AVATAR', avatar)
+          commit('SET_ROLE', roles)
+          resolve(data)
+        })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
 
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        commit('SET_TOKEN', '')
-        removeToken()
-        resetRouter()
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
+      logout(state.token)
+        .then(() => {
+          commit('SET_TOKEN', '')
+          removeToken()
+          resetRouter()
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
     })
   },
 
@@ -90,4 +94,3 @@ export default {
   mutations,
   actions
 }
-
