@@ -8,6 +8,14 @@ export function queryCoursePage(params) {
   })
 }
 
+export function queryCourseIdByClassId(params) {
+  return request({
+    url: '/course/queryCourseIdByClassId',
+    method: 'get',
+    params
+  })
+}
+
 export function queryCoursePageByCondition(params, data) {
   for (const prop in data) {
     if (data.hasOwnProperty(prop) && data[prop] === '') {

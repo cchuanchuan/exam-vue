@@ -15,7 +15,7 @@ export function queryExamPageByCondition(params, data) {
     }
   }
   return request({
-    url: '/exam/queryPageByCondition',
+    url: '/exam/queryExamPageShow',
     method: 'post',
     params,
     data
@@ -67,5 +67,37 @@ export function deleteExam(data) {
     url: '/exam/delete',
     method: 'delete',
     data
+  })
+}
+
+export function queryTimeDatil(params) {
+  return request({
+    url: '/exam/queryTimeDatil',
+    method: 'get',
+    params
+  })
+}
+
+export function queryExamTeacherByExam(params) {
+  return request({
+    url: '/exam/queryExamTeacherByExam',
+    method: 'get',
+    params
+  })
+}
+
+export function queryClassRoomByExam(params) {
+  return request({
+    url: '/exam/queryClassRoomByExam',
+    method: 'get',
+    params
+  })
+}
+
+export function queryClazsByExam(params) {
+  return request({
+    url: '/exam/queryClazsByExam',
+    method: 'get',
+    params
   })
 }

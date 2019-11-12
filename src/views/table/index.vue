@@ -5,94 +5,94 @@
   <div class="app-container">
     <div class="filter-container">
       <el-button
-v-waves
-                 class="filter-item"
-                 type="primary"
-                 icon="el-icon-search"
-                 @click="handleFilter"
->
+        v-waves
+        class="filter-item"
+        type="primary"
+        icon="el-icon-search"
+        @click="handleFilter"
+      >
         Search
       </el-button>
       <el-button
-class="filter-item"
-                 style="margin-left: 10px;"
-                 type="primary"
-                 icon="el-icon-edit"
-                 @click="handleCreate"
->
+        class="filter-item"
+        style="margin-left: 10px;"
+        type="primary"
+        icon="el-icon-edit"
+        @click="handleCreate"
+      >
         Add
       </el-button>
       <el-button
-v-waves
-                 :loading="downloadLoading"
-                 class="filter-item"
-                 type="primary"
-                 icon="el-icon-download"
-                 @click="handleDownload"
->
+        v-waves
+        :loading="downloadLoading"
+        class="filter-item"
+        type="primary"
+        icon="el-icon-download"
+        @click="handleDownload"
+      >
         Export
       </el-button>
     </div>
 
     <el-table
-v-loading="listLoading"
-              :data="list"
-              element-loading-text="Loading"
-              border
-              fit
-              highlight-current-row
->
+      v-loading="listLoading"
+      :data="list"
+      element-loading-text="Loading"
+      border
+      fit
+      highlight-current-row
+    >
 
       <el-table-column
-align="center"
-                       label="ID"
-                       width="80"
->
+        align="center"
+        label="ID"
+        width="80"
+      >
         <template slot-scope="scope">
           {{ scope.row.id }}
         </template>
       </el-table-column>
       <el-table-column
-align="center"
-                       label="学号"
-                       width="130"
->
+        align="center"
+        label="学号"
+        width="130"
+      >
         <template slot-scope="scope">
           {{ scope.row.studentNo }}
         </template>
       </el-table-column>
       <el-table-column
-label="姓名"
-                       width="110"
-                       align="center"
->
+        label="姓名"
+        width="110"
+        align="center"
+      >
         <template slot-scope="scope">
           <span>{{ scope.row.studentName }}</span>
         </template>
       </el-table-column>
       <el-table-column
-label="性别"
-                       width="80"
-                       align="center"
->
+        label="性别"
+        width="80"
+        align="center"
+      >
         <template slot-scope="scope">
           {{ scope.row.studentSex }}
         </template>
       </el-table-column>
       <el-table-column
-label="电话"
-                       width="130"
-                       align="center"
->
+        label="电话"
+        width="130"
+        align="center"
+      >
         <template slot-scope="scope">
           {{ scope.row.studentPhone }}
         </template>
       </el-table-column>
       <el-table-column
-label="班级编号"
-                       width="120"
-                       align="center"
->
+        label="班级编号"
+        width="120"
+        align="center"
+      >
         <template slot-scope="scope">
           {{ scope.row.classId }}
         </template>
@@ -103,25 +103,25 @@ label="班级编号"
         </template>
       </el-table-column>
       <el-table-column
-label="Actions"
-                       align="center"
-                       width="200"
-                       class-name="small-padding fixed-width"
->
+        label="Actions"
+        align="center"
+        width="200"
+        class-name="small-padding fixed-width"
+      >
         <template slot-scope="{row}">
           <el-button
-type="primary"
-                     size="mini"
-                     @click="handleUpdate(row)"
->
+            type="primary"
+            size="mini"
+            @click="handleUpdate(row)"
+          >
             编辑
           </el-button>
           <el-button
-v-if="row.status!='deleted'"
-                     size="mini"
-                     type="danger"
-                     @click="handleModifyStatus(row,'deleted')"
->
+            v-if="row.status!='deleted'"
+            size="mini"
+            type="danger"
+            @click="handleModifyStatus(row,'deleted')"
+          >
             删除
           </el-button>
         </template>
@@ -129,14 +129,14 @@ v-if="row.status!='deleted'"
     </el-table>
     </br>
     <el-pagination
-:current-page="pageNum"
-                   :page-size="pageSize"
-                   :page-sizes="[1, 5, 10, 20, 40]"
-                   :total="total"
-                   layout="total, sizes, prev, pager, next, jumper"
-                   @size-change="handleSizeChange"
-                   @current-change="handleCurrentChange"
-/>
+      :current-page="pageNum"
+      :page-size="pageSize"
+      :page-sizes="[1, 5, 10, 20, 40]"
+      :total="total"
+      layout="total, sizes, prev, pager, next, jumper"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
 
     <!-- 编辑框 -->
     <!-- <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">

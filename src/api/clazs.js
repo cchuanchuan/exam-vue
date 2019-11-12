@@ -16,9 +16,23 @@ export function getAllClazs(params) {
   })
 }
 
-export function queryClazsByCourse(params) {
+export function queryClazsPageByCondition(params, data) {
+  for (const prop in data) {
+    if (data.hasOwnProperty(prop) && data[prop] === '') {
+      delete data[prop]
+    }
+  }
   return request({
-    url: '/clazs/queryClazsByCourse',
+    url: '/clazs/queryPageByCondition',
+    method: 'post',
+    params,
+    data
+  })
+}
+
+export function queryClazsByClazs(params) {
+  return request({
+    url: '/clazs/queryClazsByClazs',
     method: 'get',
     params
   })

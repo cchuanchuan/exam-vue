@@ -43,13 +43,7 @@
         />
       </el-select>
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
-      <el-button
-        class="filter-item"
-        style="margin-left: 10px;"
-        type="primary"
-        icon="el-icon-edit"
-        @click="handleCreate"
-      >Add</el-button>
+
       <!-- <el-button  :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
         Export
       </el-button>-->
@@ -91,22 +85,6 @@
       </el-table-column>
       <el-table-column label="地址">
         <template slot-scope="scope">{{ scope.row.studentAddress }}</template>
-      </el-table-column>
-      <el-table-column
-        label="Actions"
-        align="center"
-        width="200"
-        class-name="small-padding fixed-width"
-      >
-        <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">编辑</el-button>
-          <el-button
-            v-if="row.status!='deleted'"
-            size="mini"
-            type="danger"
-            @click="handleDelete(row)"
-          >删除</el-button>
-        </template>
       </el-table-column>
     </el-table>
     <br >

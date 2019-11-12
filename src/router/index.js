@@ -61,12 +61,103 @@ export const permissionRouter = [
         }
       },
       {
-        path: 'exam',
-        name: 'exam',
-        component: () => import('@/views/table/exam'),
+        path: 'course',
+        name: 'course',
+        component: () => import('@/views/table/course'),
         meta: {
-          title: '考试信息管理',
+          title: '课程信息管理',
           roles: ['admin-user', 'teacher-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'clazs',
+        name: 'clazs',
+        component: () => import('@/views/table/clazs'),
+        meta: {
+          title: '班级信息管理',
+          roles: ['admin-user', 'teacher-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'classroom',
+        name: 'classroom',
+        component: () => import('@/views/table/classroom'),
+        meta: {
+          title: '教室信息管理',
+          roles: ['admin-user', 'teacher-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'department',
+        name: 'department',
+        component: () => import('@/views/table/department'),
+        meta: {
+          title: '院系信息管理',
+          roles: ['admin-user', 'teacher-user'],
+          icon: 'table'
+        }
+      },
+
+      {
+        path: 'student',
+        name: 'student',
+        component: () => import('@/views/stable/student'),
+        meta: {
+          title: '学生信息',
+          roles: ['admin-user', 'student-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'teacher',
+        name: 'teacher',
+        component: () => import('@/views/stable/teacher'),
+        meta: {
+          title: '教师信息',
+          roles: ['admin-user', 'student-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'course',
+        name: 'course',
+        component: () => import('@/views/stable/course'),
+        meta: {
+          title: '课程信息',
+          roles: ['admin-user', 'student-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'clazs',
+        name: 'clazs',
+        component: () => import('@/views/stable/clazs'),
+        meta: {
+          title: '班级信息',
+          roles: ['admin-user', 'student-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'classroom',
+        name: 'classroom',
+        component: () => import('@/views/stable/classroom'),
+        meta: {
+          title: '教室信息',
+          roles: ['admin-user', 'student-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: 'department',
+        name: 'department',
+        component: () => import('@/views/stable/department'),
+        meta: {
+          title: '院系信息',
+          roles: ['admin-user', 'student-user'],
           icon: 'table'
         }
       },
@@ -108,6 +199,38 @@ export const permissionRouter = [
           roles: ['admin-user', 'teacher-user'],
           icon: 'form'
         }
+      },
+      {
+        path: 'exam',
+        name: 'exam',
+        component: () => import('@/views/table/exam'),
+        meta: {
+          title: '考试信息管理',
+          roles: ['admin-user', 'teacher-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: '/examDetail',
+        name: 'examDetail',
+        component: () => import('@/views/table/examDetail'),
+        hidden: true
+      },
+      {
+        path: 'exam',
+        name: 'exam',
+        component: () => import('@/views/stable/exam'),
+        meta: {
+          title: '考试信息',
+          roles: ['admin-user', 'student-user'],
+          icon: 'table'
+        }
+      },
+      {
+        path: '/sexamDetail',
+        name: 'sexamDetail',
+        component: () => import('@/views/stable/examDetail'),
+        hidden: true
       }
     ]
   },

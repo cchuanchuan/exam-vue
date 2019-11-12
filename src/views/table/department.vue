@@ -4,44 +4,22 @@
   <!-- “:” 是指令 “v-bind”的缩写，“@”是指令“v-on”的缩写； -->
   <div class="app-container">
     <div class="filter-container">
-      <!-- listQuery: {
-        classId: '',
-        studentNo: '',
-        studentSex: '',
-      },-->
       <!-- clearable 可以清除 -->
       <el-input
-        v-model="listQuery.studentNo"
-        placeholder="学号"
+        v-model="listQuery.id"
+        placeholder="ID"
         style="width: 200px;"
         class="filter-item"
         @keyup.enter.native="handleFilter"
       />
-      <el-select
-        v-model="listQuery.studentSex"
-        placeholder="性别"
-        clearable
-        style="width: 90px"
+      <el-input
+        v-model="listQuery.depName"
+        placeholder="院系名称"
+        style="width: 200px;"
         class="filter-item"
-        @change="handleFilter"
-      >
-        <el-option label="男" value="男" />
-        <el-option label="女" value="女" />
-      </el-select>
-      <el-select
-        v-model="listQuery.classId"
-        class="filter-item"
-        clearable
-        placeholder="班级"
-        @change="handleFilter"
-      >
-        <el-option
-          v-for="item in clazsInfo"
-          :key="item.id"
-          :label="item.className"
-          :value="item.id"
-        />
-      </el-select>
+        @keyup.enter.native="handleFilter"
+      />
+
       <el-button class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">查找</el-button>
       <el-button
         class="filter-item"
@@ -50,9 +28,6 @@
         icon="el-icon-edit"
         @click="handleCreate"
       >Add</el-button>
-      <!-- <el-button  :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download" @click="handleDownload">
-        Export
-      </el-button>-->
     </div>
 
     <!-- 主要内容 -->
@@ -64,34 +39,26 @@
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" width="80">
+      <el-table-column align="center" label="ID">
         <template slot-scope="scope">{{ scope.row.id }}</template>
       </el-table-column>
-      <el-table-column align="center" label="学号" width="130">
-        <template slot-scope="scope">{{ scope.row.studentNo }}</template>
+      <el-table-column align="center" label="院系名称">
+        <template slot-scope="scope">{{ scope.row.depName }}</template>
       </el-table-column>
-      <el-table-column label="姓名" width="110" align="center">
+      <el-table-column label="院系负责人" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.studentName }}</span>
+          <span>{{ scope.row.depLeader }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="性别" width="80" align="center">
+      <el-table-column label="院系电话" align="center">
         <template slot-scope="scope">
-          <el-tag>{{ scope.row.studentSex }}</el-tag>
+          <span>{{ scope.row.depPhone }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="电话" width="130" align="center">
-        <template slot-scope="scope">{{ scope.row.studentPhone }}</template>
+      <el-table-column label="院系描述" align="center">
+        <template slot-scope="scope">{{ scope.row.depDetail }}</template>
       </el-table-column>
-      <el-table-column label="班级" width="120" align="center">
-        <template slot-scope="scope">
-          <!-- {{ scope.row.classId | clazsFilter }} -->
-          {{ getClazsName(scope.row.classId) }}
-        </template>
-      </el-table-column>
-      <el-table-column label="地址">
-        <template slot-scope="scope">{{ scope.row.studentAddress }}</template>
-      </el-table-column>
+
       <el-table-column
         label="Actions"
         align="center"
@@ -109,7 +76,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <br >
+    <br />
     <!-- 分页部分 -->
     <el-pagination
       :current-page="pageNum"
@@ -131,36 +98,20 @@
         label-width="70px"
         style="width: 400px; margin-left:50px;"
       >
-        <el-form-item label="学号" prop="studentNo">
-          <el-input v-model="temp.studentNo" />
+        <el-form-item label="ID" prop="ID">
+          <el-input v-model="temp.id" />
         </el-form-item>
-        <el-form-item label="姓名" prop="studentName">
-          <el-input v-model="temp.studentName" />
+        <el-form-item label="院系名称" prop="depName">
+          <el-input v-model="temp.depName" />
         </el-form-item>
-        <el-form-item label="密码" prop="studentName">
-          <el-input v-model="temp.studentPassword" placeholder="请输入密码" show-password />
+        <el-form-item label="院系负责人" prop="depLeader">
+          <el-input v-model="temp.depLeader" />
         </el-form-item>
-        <el-form-item label="性别" prop="studentSex">
-          <template>
-            <el-radio v-model="temp.studentSex" label="男">男</el-radio>
-            <el-radio v-model="temp.studentSex" label="女">女</el-radio>
-          </template>
+        <el-form-item label="联系方式" prop="depPhone">
+          <el-input v-model="temp.depPhone" />
         </el-form-item>
-        <el-form-item label="电话" prop="studentPhone">
-          <el-input v-model="temp.studentPhone" />
-        </el-form-item>
-        <el-form-item label="班级" prop="id">
-          <el-select v-model="temp.classId" class="filter-item" placeholder="Please select">
-            <el-option
-              v-for="item in clazsInfo"
-              :key="item.id"
-              :label="item.className"
-              :value="item.id"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="地址" prop="studentAddress">
-          <el-input v-model="temp.studentAddress" />
+        <el-form-item label="院系描述" prop="depDetail">
+          <el-input v-model="temp.depDetail" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -172,17 +123,16 @@
 </template>
 
 <script>
-import { updateStudent, addStudent, deleteStudent, queryStudentPageByCondition } from '@/api/student'
-import { getAllClazs } from '@/api/clazs'
+import { updateDepartment, addDepartment, deleteDepartment, queryDepartmentPageByCondition } from '@/api/department'
+import { queryDepartmentAll } from '@/api/department'
 
 // reduce 用法
 // total 必需。初始值, 或者计算结束后的返回值。
 // currentValue 必需。当前元素
 // currentIndex 可选。当前元素的索引
 // arr 可选。当前元素所属的数组对象。
-
 export default {
-  data() {
+  data () {
     return {
       list: null, // 数据
       listLoading: true, // 显示加载
@@ -190,20 +140,20 @@ export default {
       pageSize: 10, // 每页大小
       total: 0, // 数据总量
       listQuery: { // 查询筛选条件
-        classId: '',
-        studentSex: '',
-        studentNo: ''
+        id: '',
+        depName: '',
+        depLeader: '',
+        depPhone: '',
+        depDetail: ''
       },
       temp: { // 数据模板（修改增加时使用）
-        classId: '',
         id: '',
-        studentAddress: '',
-        studentName: '',
-        studentNo: '',
-        studentPhone: '',
-        studentSex: '',
-        studentPassword: ''
+        depName: '',
+        depLeader: '',
+        depPhone: '',
+        depDetail: ''
       },
+      profs: ['高级教师', '中级教师', '初级教师'],
       dialogFormVisible: false, // 是否显示对话框
       dialogStatus: '', // 对话框状态
       rules: { // 对话框输入数据规则
@@ -218,39 +168,39 @@ export default {
         create: 'Create'
       },
       downloadLoading: false, // 显示下载（暂未用到）
-      clazsInfo: {}, // 班级信息
-      classNameValue: {} // 班级id及name
+      depInfo: {}, // 班级信息
+      depName: {} // 班级id及name
     }
   },
-  created() { // create钩子
+  created () { // create钩子
     this.getList()
-    this.getClazs()
+    this.getDeps()
   },
   methods: { // 方法
-    getClazs() { // 获取班级信息
-      getAllClazs().then(response => { // 查询班级信息
-        this.clazsInfo = response.data
-        console.log('clazsInfo:' + this.clazsInfo)
+    getDeps () { // 获取班级信息
+      queryDepartmentAll().then(response => { // 查询班级信息
+        this.depInfo = response.data
+        console.log('departmentInfo:' + this.depInfo)
       }).then(() => {
-        this.classNameValue = this.clazsInfo.reduce((acc, cur) => {
-          acc[cur.id] = cur.className
+        this.depName = this.depInfo.reduce((acc, cur) => {
+          acc[cur.id] = cur.depName
           return acc
         }, {})
+        console.log(JSON.stringify(this.depName))
       })
     },
-    getClazsName(classId) { // 获取班级名称
-      // return classId
-      return this.classNameValue[classId] == null ? classId : this.classNameValue[classId]
+    getDepName (depId) { // 获取名称
+      return this.depName[depId] == null ? depId : this.depName[depId]
     },
-    getList() { // 获取表格数据信息
+    getList () { // 获取表格数据信息
       var pageNum = this.pageNum
       var pageSize = this.pageSize
       var requestData = { pageNum, pageSize }
       console.log('requestData:' + requestData)
       this.listLoading = true
-      queryStudentPageByCondition(requestData, this.listQuery).then(response => { // 查询学生信息
+      queryDepartmentPageByCondition(requestData, this.listQuery).then(response => { // 查询信息
         this.list = response.data
-        console.log('list:' + this.list)
+        console.log('list:' + JSON.stringify(this.list))
         this.pageNum = response.pageNum
         this.pageSize = response.pageSize
         this.total = response.total
@@ -262,20 +212,20 @@ export default {
     },
 
     // 分页管理，页面大小改变
-    handleSizeChange: function(pageSize) {
-      this.pageSize = pageSize
+    handleSizeChange: function (pageSize) {
       this.pageNum = 1
+      this.pageSize = pageSize
       this.getList()
       console.log('pageSize: ' + this.pageSize) // 每页下拉显示数据
     },
     // 分页管理 当前页码改变
-    handleCurrentChange: function(pageNum) {
+    handleCurrentChange: function (pageNum) {
       this.pageNum = pageNum
       this.getList()
       console.log('pageNum: ' + this.pageNum) // 点击第几页
     },
     // 点击编辑按钮
-    handleUpdate(row) {
+    handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
@@ -284,9 +234,9 @@ export default {
       })
     },
     // 点击删除按钮
-    handleDelete(row) {
+    handleDelete (row) {
       this.temp = Object.assign({}, row) // copy obj
-      deleteStudent(this.temp).then(() => {
+      deleteDepartment(this.temp).then(() => {
         this.$notify({
           title: 'Success',
           message: 'Deleted Successfully',
@@ -298,7 +248,7 @@ export default {
       this.list.splice(index, 1)
     },
     // 点击创建按钮
-    handleCreate() {
+    handleCreate () {
       this.resetTemp()
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
@@ -307,30 +257,29 @@ export default {
       })
     },
     // 查询操作
-    handleFilter() {
+    handleFilter () {
       this.pageNum = 1 // 显示第一页
       this.getList()
     },
-    // 重新设置数据（add造作）
-    resetTemp() {
+    // 重新设置数据（add操作）
+    resetTemp () {
       this.temp = {
-        classId: '',
         id: '',
-        studentAddress: '',
-        studentName: '',
-        studentNo: '',
-        studentPhone: '',
-        studentSex: '',
-        studentPassword: ''
+        departmentNo: '',
+        departmentName: '',
+        departmentProf: '',
+        departmentPassword: '',
+        depId: ''
       }
     },
     // 插入数据请求
-    createData() {
+    createData () {
       console.log('createData')
-      var student = this.temp
+      // var Department = this.temp
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          addStudent(student).then(() => {
+          console.log('Department:' + this.temp)
+          addDepartment(this.temp).then(() => {
             this.list.unshift(this.temp)
             this.dialogFormVisible = false
             this.$notify({
@@ -344,11 +293,11 @@ export default {
       })
     },
     // 更新数据请求
-    updateData() {
+    updateData () {
       this.$refs['dataForm'].validate((valid) => { // 验证表单
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          updateStudent(tempData).then(() => {
+          updateDepartment(tempData).then(() => {
             for (const v of this.list) { // 更新页面数据
               if (v.id === this.temp.id) {
                 const index = this.list.indexOf(v)

@@ -80,16 +80,10 @@
       >
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleDetail(row)">详情</el-button>
-          <el-button
-            v-if="row.status!='deleted'"
-            size="mini"
-            type="danger"
-            @click="handleDelete(row)"
-          >删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <br />
+    <br >
     <!-- 分页部分 -->
     <el-pagination
       :current-page="pageNum"
@@ -115,7 +109,7 @@ import { queryCourseIdByClassId } from '@/api/course'
 // currentIndex 可选。当前元素的索引
 // arr 可选。当前元素所属的数组对象。
 export default {
-  data () {
+  data() {
     return {
       list: null, // 数据
       listLoading: true, // 显示加载
@@ -132,13 +126,13 @@ export default {
       clazses: ''
     }
   },
-  created () { // create钩子
+  created() { // create钩子
     this.getList()
     this.getGradeList()
     this.getClazstList()
   },
   methods: { // 方法
-    getList () { // 获取表格数据信息
+    getList() { // 获取表格数据信息
       var pageNum = this.pageNum
       var pageSize = this.pageSize
       var requestData = { pageNum, pageSize }
@@ -151,13 +145,13 @@ export default {
         this.listLoading = false
       })
     },
-    getGradeList () {
+    getGradeList() {
       queryGradeAll().then(res => {
         this.grades = res.data
         console.log(JSON.stringify(this.grades))
       })
     },
-    getGradeString (grade, semester) {
+    getGradeString(grade, semester) {
       if (semester = 1) {
         return '第' + (grade - 1) + '-' + grade + '学年,第二学期'
       } else if (semester = 2) {
@@ -165,27 +159,27 @@ export default {
       }
       return ''
     },
-    getClazstList () {
+    getClazstList() {
       getClazstList().then(res => {
         this.clazses = res.data
       })
     },
 
     // 分页管理，页面大小改变
-    handleSizeChange: function (pageSize) {
+    handleSizeChange: function(pageSize) {
       this.pageNum = 1
       this.pageSize = pageSize
       this.getList()
       console.log('pageSize: ' + this.pageSize) // 每页下拉显示数据
     },
     // 分页管理 当前页码改变
-    handleCurrentChange: function (pageNum) {
+    handleCurrentChange: function(pageNum) {
       this.pageNum = pageNum
       this.getList()
       console.log('pageNum: ' + this.pageNum) // 点击第几页
     },
     // 点击删除按钮
-    handleDelete (row) {
+    handleDelete(row) {
       this.temp = Object.assign({}, row) // copy obj
       deleteExam(this.temp).then(() => {
         this.$notify({
@@ -198,19 +192,19 @@ export default {
         this.list.splice(index, 1)
       })
     },
-    handleDetail (row) {
+    handleDetail(row) {
       this.$router.push({
-        name: 'examDetail', // 页面名字
-        path: '/examDetail', // 页面路劲 和上面名字任意一个都可以
+        name: 'sexamDetail', // 页面名字
+        path: '/sexamDetail', // 页面路劲 和上面名字任意一个都可以
         query: { flight: JSON.stringify(row) } // 参数传值
       })
     },
     // 查询操作
-    handleFilter () {
+    handleFilter() {
       this.pageNum = 1 // 显示第一页
       this.getList()
     },
-    handleClass () {
+    handleClass() {
       this.listQuery.courseIds = ''
       var classId = this.classId
       if (classId != null && classId !== '') {
@@ -231,7 +225,7 @@ export default {
       }
     },
     // 导出的方法
-    exportExcel () {
+    exportExcel() {
       require.ensure([], () => {
         const { export_json_to_excel } = require('../excel/Export2Excel')
         const tHeader = ['考试ID', '考试学科', '考试时间', '学科绩点']
@@ -244,7 +238,7 @@ export default {
       })
     },
 
-    formatJson (filterVal, jsonData) {
+    formatJson(filterVal, jsonData) {
       return jsonData.map(v => filterVal.map(j => v[j]))
     }
   }
