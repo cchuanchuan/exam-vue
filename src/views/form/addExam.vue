@@ -377,7 +377,13 @@ export default {
       this.examTemp.examTimeDto = this.examTime
       console.log(JSON.stringify(this.examTemp))
       addExamDto(this.examTemp).then(res => {
-        console.log(res)
+        alert('添加成功')
+        this.$router.push({
+          name: 'exam', // 页面名字
+          path: '/exam' // 页面路劲 和上面名字任意一个都可以
+        })
+      }).catch(() => {
+        alert('添加失败，请检查是否重复提交!')
       })
       // var requestData = []
     }

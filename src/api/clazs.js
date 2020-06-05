@@ -30,9 +30,9 @@ export function queryClazsPageByCondition(params, data) {
   })
 }
 
-export function queryClazsByClazs(params) {
+export function queryClazsByCourse(params) {
   return request({
-    url: '/clazs/queryClazsByClazs',
+    url: '/clazs/queryClazsByCourse',
     method: 'get',
     params
   })

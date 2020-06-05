@@ -10,7 +10,7 @@ export const fixedRouter = [
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true
+    hidden: true,
   },
   {
     path: '/',
@@ -21,17 +21,17 @@ export const fixedRouter = [
         path: 'welcome',
         name: 'Welcome',
         component: () => import('@/views/welcome/index'),
-        meta: { title: '欢迎界面', icon: 'dashboard' }
-      }
-    ]
-  }
+        meta: { title: '欢迎界面', icon: 'dashboard' },
+      },
+    ],
+  },
 ]
 // 需要权限判断展示的路由
 export const permissionRouter = [
   {
     path: '/404',
     component: () => import('@/views/404'),
-    hidden: true
+    hidden: true,
   },
   {
     path: '/example',
@@ -47,8 +47,8 @@ export const permissionRouter = [
         meta: {
           title: '学生信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: 'teacher',
@@ -57,8 +57,8 @@ export const permissionRouter = [
         meta: {
           title: '教师信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: 'course',
@@ -67,8 +67,8 @@ export const permissionRouter = [
         meta: {
           title: '课程信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: 'clazs',
@@ -77,8 +77,8 @@ export const permissionRouter = [
         meta: {
           title: '班级信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: 'classroom',
@@ -87,8 +87,8 @@ export const permissionRouter = [
         meta: {
           title: '教室信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: 'department',
@@ -97,8 +97,8 @@ export const permissionRouter = [
         meta: {
           title: '院系信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
 
       {
@@ -107,9 +107,9 @@ export const permissionRouter = [
         component: () => import('@/views/stable/student'),
         meta: {
           title: '学生信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
       {
         path: 'teacher',
@@ -117,9 +117,9 @@ export const permissionRouter = [
         component: () => import('@/views/stable/teacher'),
         meta: {
           title: '教师信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
       {
         path: 'course',
@@ -127,9 +127,9 @@ export const permissionRouter = [
         component: () => import('@/views/stable/course'),
         meta: {
           title: '课程信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
       {
         path: 'clazs',
@@ -137,9 +137,9 @@ export const permissionRouter = [
         component: () => import('@/views/stable/clazs'),
         meta: {
           title: '班级信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
       {
         path: 'classroom',
@@ -147,9 +147,9 @@ export const permissionRouter = [
         component: () => import('@/views/stable/classroom'),
         meta: {
           title: '教室信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
       {
         path: 'department',
@@ -157,21 +157,11 @@ export const permissionRouter = [
         component: () => import('@/views/stable/department'),
         meta: {
           title: '院系信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: {
-          title: 'Tree',
-          roles: ['admin-user', 'teacher-user', 'student-user'],
-          icon: 'tree'
-        }
-      }
-    ]
+    ],
   },
 
   {
@@ -181,15 +171,9 @@ export const permissionRouter = [
     name: 'Form',
     meta: {
       title: '考务管理',
-      icon: 'form'
+      icon: 'form',
     },
     children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      },
       {
         path: 'addExam',
         name: 'AddExam',
@@ -197,8 +181,8 @@ export const permissionRouter = [
         meta: {
           title: '添加考试',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'form'
-        }
+          icon: 'form',
+        },
       },
       {
         path: 'exam',
@@ -207,32 +191,32 @@ export const permissionRouter = [
         meta: {
           title: '考试信息管理',
           roles: ['admin-user', 'teacher-user'],
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: '/examDetail',
         name: 'examDetail',
         component: () => import('@/views/table/examDetail'),
-        hidden: true
+        hidden: true,
       },
       {
         path: 'exam',
         name: 'exam',
         component: () => import('@/views/stable/exam'),
         meta: {
-          title: '考试信息',
-          roles: ['admin-user', 'student-user'],
-          icon: 'table'
-        }
+          title: '考试信息查看',
+          roles: ['student-user'],
+          icon: 'table',
+        },
       },
       {
         path: '/sexamDetail',
         name: 'sexamDetail',
         component: () => import('@/views/stable/examDetail'),
-        hidden: true
-      }
-    ]
+        hidden: true,
+      },
+    ],
   },
   {
     path: 'external-link',
@@ -241,12 +225,12 @@ export const permissionRouter = [
       {
         path: 'http://jwc.njit.edu.cn/',
         roles: ['admin-user', 'teacher-user', 'student-user'],
-        meta: { title: '教务处', icon: 'link' }
-      }
-    ]
+        meta: { title: '教务处', icon: 'link' },
+      },
+    ],
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404', hidden: true },
 ]
 
 const createRouter = () => {
@@ -254,7 +238,7 @@ const createRouter = () => {
   return new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: fixedRouter
+    routes: fixedRouter,
   })
 }
 
